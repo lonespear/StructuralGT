@@ -100,7 +100,7 @@ def binarize(source, Threshtype, gamma, md_filter, g_blur, autolvl, fg_color, \
 
     # making a 5x5 array of all 1's for median filter, and a disk for the autolevel filter
     darray = np.zeros((5, 5)) + 1
-    selem = disk(bsize)
+    selem = disk(11)
 
     # applying median filter
     if (md_filter == 1):
@@ -112,7 +112,7 @@ def binarize(source, Threshtype, gamma, md_filter, g_blur, autolvl, fg_color, \
 
     # applying autolevel filter
     if (autolvl == 1):
-        img = autolevel(img, selem=selem)
+        img = autolevel(img, selem)
 
     # applying a scharr filter, and then taking that image and weighting it 25% with the original
     # this should bring out the edges without separating each "edge" into two separate parallel ones
@@ -132,8 +132,8 @@ def binarize(source, Threshtype, gamma, md_filter, g_blur, autolvl, fg_color, \
         scale = 1;
         delta = 0;
         ddepth = cv2.CV_16S
-        grad_x = cv2.Sobel(img, ddepth, 1, 0, ksize=3, scale=scale, delta=delta, borderType=cv2.BORDER_DEFAULT)
-        grad_y = cv2.Sobel(img, ddepth, 0, 1, ksize=3, scale=scale, delta=delta, borderType=cv2.BORDER_DEFAULT)
+        grad_x = cv2.Sobel(img, ddepth, 1, 0, ksize=7, scale=scale, delta=delta, borderType=cv2.BORDER_DEFAULT)
+        grad_y = cv2.Sobel(img, ddepth, 0, 1, ksize=7, scale=scale, delta=delta, borderType=cv2.BORDER_DEFAULT)
         abs_grad_x = cv2.convertScaleAbs(grad_x)
         abs_grad_y = cv2.convertScaleAbs(grad_y)
         dst = cv2.addWeighted(abs_grad_x, 0.5, abs_grad_y, 0.5, 0)
@@ -144,7 +144,7 @@ def binarize(source, Threshtype, gamma, md_filter, g_blur, autolvl, fg_color, \
     # applying laplacian filter
     if (laplacian == 1):
         ddepth = cv2.CV_16S
-        dst = cv2.Laplacian(img, ddepth, ksize=5)
+        dst = cv2.Laplacian(img, ddepth, ksize=11)
 
         # dst = cv2.Canny(img, 100, 200); # canny edge detection test
         dst = cv2.convertScaleAbs(dst)
