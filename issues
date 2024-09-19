@@ -1,0 +1,8 @@
+Traceback (most recent call last):
+  File "<frozen runpy>", line 198, in _run_module_as_main
+  File "<frozen runpy>", line 88, in _run_code
+  File "C:\Users\___________\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.12_qbz5n2kfra8p0\LocalCache\local-packages\Python312\site-packages\StructuralGT\__main__.py", line 27, in <module>
+    from StructuralGT import gui_multi_image, gui_single_image
+  File "C:\Users\___________\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.12_qbz5n2kfra8p0\LocalCache\local-packages\Python312\site-packages\StructuralGT\gui_multi_image.py", line 29, in <module>
+    import multi_image_settings
+ModuleNotFoundError: No module named 'multi_image_settings'
